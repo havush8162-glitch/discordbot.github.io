@@ -1,0 +1,1089 @@
+<!DOCTYPE html>  
+<html lang="ja">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>タヌキは神だ！ | Official Profile</title>  
+  
+```
+<!-- SEO & OGP Setting -->
+<meta name="description" content="タヌキは神だ！の公式プロフィールサイト。ゲーム・SNS・Web制作が好きです。">
+<meta name="keywords" content="タヌキは神だ！, プロフィール, Web制作, Roblox, Fortnite, Discord">
+<meta property="og:title" content="タヌキは神だ！ | Official Profile">
+<meta property="og:description" content="ゲーム・SNS・Web制作が好きな「タヌキは神だ！」の超高級ポートフォリオサイト。">
+<meta property="og:type" content="website">
+
+<!-- PWA Basic Meta -->
+<meta name="theme-color" content="#0a0a0c">
+
+<!-- Google Fonts & Font Awesome Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    /* ----------------------------------------------------------------
+       1. RESET & BASE STYLES
+    ------------------------------------------------------------------- */
+    :root {
+        --bg-base: #030304;
+        --bg-grid: rgba(255, 255, 255, 0.04);
+        --text-main: #ffffff;
+        --text-sub: #a0a0aa;
+        --neon-glow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 30px rgba(255, 255, 255, 0.1);
+        --neon-border: rgba(255, 255, 255, 0.15);
+        --glass-bg: rgba(10, 10, 12, 0.45);
+        --glass-blur: blur(20px);
+        --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    }
+
+    html, body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: var(--bg-base);
+        font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+        color: var(--text-main);
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* カスタムスクロールバー */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        transition: var(--transition-smooth);
+    }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
+
+    @media print { body { display: none !important; } }
+
+    body.devtools-open {
+        filter: blur(100px) grayscale(1) contrast(0) !important;
+        pointer-events: none !important;
+    }
+
+    /* ----------------------------------------------------------------
+       2. BACKGROUND VISUALS
+    ------------------------------------------------------------------- */
+    #bg-canvas {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .bg-grid-overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-image: 
+            linear-gradient(var(--bg-grid) 1px, transparent 1px),
+            linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position: center;
+        z-index: 2;
+        pointer-events: none;
+        opacity: 0.8;
+        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    }
+
+    .bg-aurora {
+        position: fixed;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 60% 60%, rgba(255,255,255,0.02) 0%, transparent 50%);
+        z-index: 2;
+        pointer-events: none;
+        animation: auroraRotate 20s linear infinite;
+    }
+
+    @keyframes auroraRotate {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.1); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .cursor-light {
+        position: fixed;
+        width: 500px; height: 500px;
+        background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%);
+        border-radius: 50%;
+        top: 0; left: 0;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        transition: width 0.2s, height 0.2s;
+    }
+
+    /* ----------------------------------------------------------------
+       3. ENTRY / LOADING SCREEN (自動再生突破のためのクリックスクリーン)
+    ------------------------------------------------------------------- */
+    #entry-screen {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: #000000;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), transform 1s;
+        cursor: pointer;
+    }
+    .entry-title {
+        font-size: 2.5rem;
+        font-weight: 900;
+        letter-spacing: 0.8rem;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        text-shadow: var(--neon-glow);
+        animation: pulseText 2s infinite alternate;
+    }
+    @keyframes pulseText {
+        0% { opacity: 0.7; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+        100% { opacity: 1; text-shadow: 0 0 25px rgba(255,255,255,0.5); }
+    }
+    .entry-btn {
+        padding: 12px 40px;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        font-size: 0.9rem;
+        letter-spacing: 0.2rem;
+        color: #ffffff;
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+    .entry-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: 0.5s;
+    }
+    #entry-screen:hover .entry-btn {
+        background: rgba(255,255,255,0.1);
+        border-color: #ffffff;
+        box-shadow: var(--neon-glow);
+    }
+    #entry-screen:hover .entry-btn::before { left: 100%; }
+
+    /* ----------------------------------------------------------------
+       4. MAIN LAYOUT & GLASSMORPHISM
+    ------------------------------------------------------------------- */
+    .main-wrapper {
+        position: relative;
+        z-index: 10;
+        max-width: 850px;
+        margin: 0 auto;
+        padding: 120px 24px 80px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 45px;
+        opacity: 0; /* エンター画面クリック後にフェードイン */
+        transition: opacity 1.5s ease;
+    }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), 
+                    transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--neon-border);
+        border-radius: 20px;
+        width: 100%;
+        padding: 50px 40px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* ----------------------------------------------------------------
+       5. PROFILE SECTION
+    ------------------------------------------------------------------- */
+    .profile-card {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .avatar-container {
+        position: relative;
+        width: 160px; height: 160px;
+        margin-bottom: 30px;
+    }
+    
+    .avatar-img {
+        width: 100%; height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #000;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
+        pointer-events: none;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* 音楽に合わせて光るエフェクト（JSで制御） */
+    .avatar-glow {
+        position: absolute;
+        top: -5px; left: -5px; right: -5px; bottom: -5px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+        z-index: 1;
+        opacity: 0.5;
+        transition: transform 0.1s ease, opacity 0.1s ease;
+    }
+
+    .profile-name {
+        font-size: 2.5rem;
+        font-weight: 900;
+        letter-spacing: 0.15rem;
+        margin-bottom: 16px;
+        color: #ffffff;
+        text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        position: relative;
+        display: inline-block;
+    }
+    
+    /* グリッチホバーエフェクト */
+    .profile-name:hover {
+        animation: glitchText 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    }
+    @keyframes glitchText {
+        0% { transform: translate(0); text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        20% { transform: translate(-2px, 1px); text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
+        40% { transform: translate(-1px, -1px); text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        60% { transform: translate(2px, 1px); text-shadow: -2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,255,255,0.5); }
+        80% { transform: translate(1px, -1px); text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        100% { transform: translate(0); text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+    }
+
+    .profile-bio {
+        font-size: 1.05rem;
+        color: var(--text-sub);
+        font-weight: 400;
+        letter-spacing: 0.1rem;
+    }
+
+    .neon-line {
+        width: 80px; height: 3px;
+        background: #ffffff;
+        margin: 25px 0;
+        box-shadow: var(--neon-glow);
+        border-radius: 3px;
+    }
+
+    /* ----------------------------------------------------------------
+       6. BADGES SECTION
+    ------------------------------------------------------------------- */
+    .badge-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .badge-item {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 12px 24px;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.05rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: var(--transition-smooth);
+        cursor: default;
+    }
+
+    .badge-item:hover {
+        background: #ffffff;
+        color: #000000;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        transform: scale(1.05);
+    }
+
+    /* ----------------------------------------------------------------
+       7. SNS LINKS SECTION
+    ------------------------------------------------------------------- */
+    .sns-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        width: 100%;
+    }
+
+    .sns-card {
+        background: #ffffff;
+        color: #000000;
+        padding: 25px 30px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sns-info {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .sns-icon {
+        font-size: 1.8rem;
+        width: 40px;
+        text-align: center;
+    }
+
+    .sns-name {
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 0.05rem;
+    }
+
+    .sns-arrow {
+        font-size: 1.1rem;
+        opacity: 0.2;
+        transition: var(--transition-smooth);
+    }
+
+    .sns-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+    }
+    .sns-card:hover .sns-arrow {
+        opacity: 1;
+        transform: translate(5px, -5px);
+    }
+
+    /* ----------------------------------------------------------------
+       8. MUSIC PLAYER
+    ------------------------------------------------------------------- */
+    #music-player {
+        position: fixed;
+        top: 25px; right: 25px;
+        width: 320px;
+        background: rgba(5, 5, 7, 0.75);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        z-index: 1000;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .player-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: move;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .player-title-set {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1rem;
+        color: var(--text-sub);
+    }
+
+    .player-minimize-btn {
+        background: none;
+        border: none;
+        color: var(--text-sub);
+        cursor: pointer;
+        font-size: 0.8rem;
+        transition: color 0.3s;
+    }
+    .player-minimize-btn:hover { color: #fff; }
+
+    .player-body {
+        transition: max-height 0.4s ease, opacity 0.3s ease;
+        overflow: hidden;
+        max-height: 200px;
+    }
+
+    #music-player.minimized { width: 200px; }
+    #music-player.minimized .player-body {
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+        margin-bottom: 0;
+    }
+
+    .track-info { margin-bottom: 12px; }
+    .track-name {
+        font-size: 0.95rem;
+        font-weight: 800;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-shadow: 0 0 5px rgba(255,255,255,0.2);
+    }
+
+    .player-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 12px;
+    }
+
+    .player-btn {
+        background: none;
+        border: none;
+        color: var(--text-sub);
+        font-size: 1rem;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        width: 34px; height: 34px;
+        border-radius: 50%;
+    }
+    .player-btn:hover {
+        color: #ffffff;
+        background: rgba(255,255,255,0.1);
+    }
+    .player-btn.main-play {
+        font-size: 1.1rem;
+        background: #ffffff;
+        color: #000000;
+    }
+    .player-btn.main-play:hover {
+        box-shadow: var(--neon-glow);
+        transform: scale(1.1);
+    }
+    .player-btn.active {
+        color: #000000;
+        background: #ffffff;
+        box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+
+    .progress-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.7rem;
+        color: var(--text-sub);
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
+    .seek-slider {
+        flex: 1;
+        -webkit-appearance: none;
+        height: 4px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+    }
+    .seek-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    .volume-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.75rem;
+        color: var(--text-sub);
+    }
+    .volume-slider {
+        width: 80px;
+        -webkit-appearance: none;
+        height: 3px;
+        background: rgba(255,255,255,0.15);
+        outline: none;
+        cursor: pointer;
+    }
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: #ffffff;
+    }
+
+    /* ----------------------------------------------------------------
+       9. FOOTER SECTION
+    ------------------------------------------------------------------- */
+    footer {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--text-sub);
+        letter-spacing: 0.1rem;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        position: relative;
+        z-index: 10;
+    }
+
+    /* ----------------------------------------------------------------
+       10. PSEUDO 404 SYSTEM
+    ------------------------------------------------------------------- */
+    #error-404-screen {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: #000000;
+        z-index: 10000;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .error-code { font-size: 8rem; font-weight: 900; text-shadow: var(--neon-glow); }
+    .error-msg { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 30px; letter-spacing: 0.2rem; }
+    .back-btn {
+        padding: 12px 35px;
+        background: transparent;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+        cursor: pointer;
+        border-radius: 50px;
+        font-weight: 700;
+        transition: var(--transition-smooth);
+    }
+    .back-btn:hover { background: #ffffff; color: #000000; box-shadow: var(--neon-glow); }
+
+    /* ----------------------------------------------------------------
+       11. RESPONSIVE DESIGN
+    ------------------------------------------------------------------- */
+    @media (max-width: 768px) {
+        .sns-grid { grid-template-columns: 1fr; }
+        .profile-name { font-size: 1.8rem; }
+        #music-player {
+            top: auto; bottom: 20px; right: 20px; left: 20px;
+            width: calc(100% - 40px);
+        }
+        #music-player.minimized { width: 160px; left: auto; }
+        .main-wrapper { padding-top: 60px; padding-bottom: 150px; }
+        .entry-title { font-size: 1.8rem; }
+    }
+</style>
+
+```
+</head>  
+<body>  
+  
+```
+<!-- 404画面 -->
+<div id="error-404-screen">
+    <div class="error-code">404</div>
+    <div class="error-msg">SYSTEM NOT FOUND</div>
+    <button class="back-btn" onclick="close404()">RETURN</button>
+</div>
+
+<!-- エンター画面（クリックで音楽自動再生・ビジュアライザー起動） -->
+<div id="entry-screen">
+    <div class="entry-title">SYSTEM READY</div>
+    <div class="entry-btn">CLICK TO ENTER</div>
+</div>
+
+<!-- 背景・ビジュアライザー描画用キャンバス -->
+<canvas id="bg-canvas"></canvas>
+<div class="bg-grid-overlay"></div>
+<div class="bg-aurora"></div>
+<div class="cursor-light" id="js-cursor-light"></div>
+
+<!-- 音楽リソース (自動・ループ再生設定) crossoriginはWeb Audio API用 -->
+<audio id="main-audio" src="music.mp3" loop crossorigin="anonymous"></audio>
+
+<!-- 音楽プレイヤー -->
+<div id="music-player">
+    <div class="player-header" id="player-drag-zone">
+        <div class="player-title-set">
+            <i class="fa-solid fa-compact-disc fa-spin" style="animation-duration: 3s;"></i>
+            <span>AUDIO SYSTEM</span>
+        </div>
+        <button class="player-minimize-btn" id="player-min-toggle" title="最小化">
+            <i class="fa-solid fa-minus"></i>
+        </button>
+    </div>
+    <div class="player-body">
+        <div class="track-info">
+            <div class="track-name" id="js-track-name">music</div>
+        </div>
+        <div class="player-controls">
+            <button class="player-btn" id="player-prev" title="前の曲"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="player-btn main-play" id="player-play-pause" title="再生"><i class="fa-solid fa-pause"></i></button>
+            <button class="player-btn" id="player-next" title="次の曲"><i class="fa-solid fa-forward-step"></i></button>
+            <button class="player-btn active" id="player-loop" title="ループ"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+        <div class="progress-container">
+            <span id="current-time">0:00</span>
+            <input type="range" class="seek-slider" id="seek-slider" min="0" max="100" value="0">
+            <span id="duration-time">0:00</span>
+        </div>
+        <div class="volume-container">
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="70">
+        </div>
+    </div>
+</div>
+
+<!-- メインコンテンツ -->
+<div class="main-wrapper" id="main-content">
+
+    <!-- プロフィール -->
+    <section class="glass-card profile-card reveal">
+        <div class="avatar-container">
+            <div class="avatar-glow" id="avatar-glow"></div>
+            <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=400" alt="Avatar" class="avatar-img">
+        </div>
+        <h1 class="profile-name">タヌキは神だ！</h1>
+        <div class="neon-line"></div>
+        <p class="profile-bio">ゲーム・SNS・Web制作が好きです。</p>
+    </section>
+
+    <!-- バッジ -->
+    <section class="badge-container reveal">
+        <div class="badge-item">🏆 Discord制作者</div>
+        <div class="badge-item">🎮 Roblox勢</div>
+        <div class="badge-item">🎮 フォトナ勢</div>
+        <div class="badge-item">💻 サイト制作者</div>
+        <div class="badge-item">🌱 環境貢献</div>
+    </section>
+
+    <!-- SNS一覧 -->
+    <section class="sns-grid reveal">
+        <a href="https://www.tiktok.com/@jau8142?_r=1&_t=ZS-97rDkKo25xd" target="_blank" rel="noopener noreferrer" class="sns-card">
+            <div class="sns-info">
+                <div class="sns-icon"><i class="fa-brands fa-tiktok"></i></div>
+                <span class="sns-name">TikTok</span>
+            </div>
+            <div class="sns-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+        <a href="https://youtube.com/@jjchc?si=oaBPiHFDtW1nLdcs" target="_blank" rel="noopener noreferrer" class="sns-card">
+            <div class="sns-info">
+                <div class="sns-icon" style="color: #ff0000;"><i class="fa-brands fa-youtube"></i></div>
+                <span class="sns-name">YouTube</span>
+            </div>
+            <div class="sns-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+        <a href="https://x.com/saas770180mp5?s=11" target="_blank" rel="noopener noreferrer" class="sns-card">
+            <div class="sns-info">
+                <div class="sns-icon"><i class="fa-brands fa-x-twitter"></i></div>
+                <span class="sns-name">X</span>
+            </div>
+            <div class="sns-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+        <a href="https://www.instagram.com/bayadw825?igsh=MmZ5eXZ4YXJrZ3Q4&utm_source=qr" target="_blank" rel="noopener noreferrer" class="sns-card">
+            <div class="sns-info">
+                <div class="sns-icon" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><i class="fa-brands fa-instagram"></i></div>
+                <span class="sns-name">Instagram</span>
+            </div>
+            <div class="sns-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+        <a href="https://www.threads.com/@bayadw825?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" class="sns-card">
+            <div class="sns-info">
+                <div class="sns-icon"><i class="fa-brands fa-threads"></i></div>
+                <span class="sns-name">Threads</span>
+            </div>
+            <div class="sns-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+        <a href="https://discord.gg/NdDzTawJvH" target="_blank" rel="noopener noreferrer" class="sns-card">
+            <div class="sns-info">
+                <div class="sns-icon" style="color: #5865F2;"><i class="fa-brands fa-discord"></i></div>
+                <span class="sns-name">Discord Server</span>
+            </div>
+            <div class="sns-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+        </a>
+    </section>
+
+    <!-- フッター -->
+    <footer class="reveal">
+        <div>&copy; 2026 タヌキは神だ！</div>
+        <div style="opacity: 0.5;">Made with ❤️</div>
+    </footer>
+
+</div>
+
+<script>
+    /* =================================================================
+       A. エンターシーケンス & Web Audio API (音楽解析・自動再生)
+    ==================================================================== */
+    const entryScreen = document.getElementById('entry-screen');
+    const mainContent = document.getElementById('main-content');
+    const audio = document.getElementById('main-audio');
+    const avatarGlow = document.getElementById('avatar-glow');
+    const cursorLight = document.getElementById('js-cursor-light');
+    
+    let audioCtx, analyser, dataArray, bufferLength;
+    let isAudioInitialized = false;
+    let currentBass = 0; // 低音域の強さ（0〜255）
+
+    // エンタークリックで音楽自動再生とUI表示
+    entryScreen.addEventListener('click', () => {
+        // Web Audio APIの初期化
+        if (!isAudioInitialized) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+            analyser = audioCtx.createAnalyser();
+            const source = audioCtx.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            
+            analyser.fftSize = 128; // 解析の解像度
+            bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+            isAudioInitialized = true;
+        }
+        
+        // 再生開始
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        audio.play().catch(e => console.log("再生エラー:", e));
+
+        // UIの切り替え
+        entryScreen.style.opacity = '0';
+        entryScreen.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            entryScreen.style.display = 'none';
+            mainContent.style.opacity = '1';
+            setTimeout(reveal, 100); // 要素フェードイン
+        }, 800);
+        
+        // クリック波紋発生
+        ripples.push(new Ripple(window.innerWidth/2, window.innerHeight/2));
+    });
+
+
+    /* =================================================================
+       B. CANVAS EFFECTS (オーディオリアクティブ・ビジュアライザー + 粒子)
+    ==================================================================== */
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let ripples = [];
+    const maxParticles = 70;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.baseSize = Math.random() * 1.5 + 0.5;
+            this.speedX = Math.random() * 0.4 - 0.2;
+            this.speedY = Math.random() * 0.5 + 0.2;
+            this.alpha = Math.random() * 0.5 + 0.2;
+            this.fadeSpeed = Math.random() * 0.01 + 0.005;
+        }
+        update() {
+            // 音楽の低音に合わせて速度が微増
+            const bassSpeed = (currentBass / 255) * 1.5;
+            this.y += this.speedY + (bassSpeed * 0.5);
+            this.x += this.speedX;
+            
+            this.alpha += this.fadeSpeed;
+            if(this.alpha > 0.8 || this.alpha < 0.1) this.fadeSpeed *= -1;
+
+            if (this.y > canvas.height || this.x < 0 || this.x > canvas.width) {
+                this.reset();
+                this.y = 0;
+            }
+        }
+        draw() {
+            // 音楽の低音に合わせてサイズが脈打つ
+            const currentSize = this.baseSize + (currentBass / 255) * 3;
+            
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#ffffff';
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    class Ripple {
+        constructor(x, y) {
+            this.x = x; this.y = y;
+            this.radius = 0; this.maxRadius = 100;
+            this.alpha = 1; this.speed = 4;
+        }
+        update() {
+            this.radius += this.speed;
+            this.alpha = 1 - (this.radius / this.maxRadius);
+        }
+        draw() {
+            if(this.alpha <= 0) return;
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${this.alpha})`;
+            ctx.lineWidth = 1.5;
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = '#ffffff';
+            ctx.stroke();
+            ctx.restore();
+        }
+    }
+
+    for (let i = 0; i < maxParticles; i++) particles.push(new Particle());
+
+    window.addEventListener('click', (e) => {
+        // エンタースクリーン非表示後のみ波紋を生成
+        if(entryScreen.style.display === 'none') {
+            ripples.push(new Ripple(e.clientX, e.clientY));
+        }
+    });
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // 音楽データの取得
+        if (isAudioInitialized && !audio.paused) {
+            analyser.getByteFrequencyData(dataArray);
+            
+            // 低音域（ベース）の平均値を算出
+            let sum = 0;
+            for(let i = 0; i < 5; i++) sum += dataArray[i];
+            currentBass = sum / 5;
+            
+            // アバターの鼓動エフェクト
+            const scale = 1 + (currentBass / 255) * 0.3;
+            const glowOpacity = 0.3 + (currentBass / 255) * 0.7;
+            avatarGlow.style.transform = `scale(${scale})`;
+            avatarGlow.style.opacity = glowOpacity;
+            
+            // カーソルライトの反応
+            cursorLight.style.width = (500 + currentBass) + 'px';
+            cursorLight.style.height = (500 + currentBass) + 'px';
+
+            // ビジュアライザー描画 (画面下部)
+            ctx.save();
+            let barWidth = (canvas.width / bufferLength) * 2;
+            let barHeight;
+            let x = 0;
+            for(let i = 0; i < bufferLength; i++) {
+                barHeight = (dataArray[i] / 255) * 150; // 最大高さ150px
+                ctx.fillStyle = `rgba(255, 255, 255, ${dataArray[i] / 255 * 0.5})`;
+                ctx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
+                x += barWidth;
+            }
+            ctx.restore();
+        } else {
+            currentBass = 0;
+            avatarGlow.style.transform = `scale(1)`;
+        }
+
+        particles.forEach(p => { p.update(); p.draw(); });
+        
+        ripples = ripples.filter(r => r.alpha > 0);
+        ripples.forEach(r => { r.update(); r.draw(); });
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // マウス追従
+    window.addEventListener('mousemove', (e) => {
+        cursorLight.style.left = e.clientX + 'px';
+        cursorLight.style.top = e.clientY + 'px';
+    });
+
+    /* =================================================================
+       C. MUSIC PLAYER LOGIC
+    ==================================================================== */
+    const playPauseBtn = document.getElementById('player-play-pause');
+    const loopBtn = document.getElementById('player-loop');
+    const prevBtn = document.getElementById('player-prev');
+    const nextBtn = document.getElementById('player-next');
+    const seekSlider = document.getElementById('seek-slider');
+    const volumeSlider = document.getElementById('volume-slider');
+    const trackNameDisplay = document.getElementById('js-track-name');
+    
+    const playlist = ["music.mp3"];
+    let currentTrackIndex = 0;
+
+    function updateTrackName() {
+        const fileName = playlist[currentTrackIndex];
+        trackNameDisplay.textContent = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+    }
+    updateTrackName();
+
+    playPauseBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+        } else {
+            audio.pause();
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        }
+    });
+
+    loopBtn.addEventListener('click', () => {
+        audio.loop = !audio.loop;
+        loopBtn.classList.toggle('active', audio.loop);
+    });
+
+    // デモ用曲送り
+    nextBtn.addEventListener('click', () => {
+        audio.currentTime = 0;
+        if(audio.paused) { audio.play(); playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; }
+    });
+    prevBtn.addEventListener('click', () => {
+        audio.currentTime = 0;
+        if(audio.paused) { audio.play(); playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; }
+    });
+
+    // タイム表示
+    function formatTime(secs) {
+        let min = Math.floor(secs / 60);
+        let sec = Math.floor(secs % 60);
+        if (sec < 10) sec = `0${sec}`;
+        return `${min}:${sec}`;
+    }
+    audio.addEventListener('loadedmetadata', () => {
+        seekSlider.max = audio.duration;
+        document.getElementById('duration-time').textContent = formatTime(audio.duration);
+    });
+    audio.addEventListener('timeupdate', () => {
+        if (!trackNameDisplay.dataset.seeking) seekSlider.value = audio.currentTime;
+        document.getElementById('current-time').textContent = formatTime(audio.currentTime);
+    });
+    seekSlider.addEventListener('input', () => trackNameDisplay.dataset.seeking = true);
+    seekSlider.addEventListener('change', () => {
+        audio.currentTime = seekSlider.value;
+        delete trackNameDisplay.dataset.seeking;
+    });
+
+    // 音量コントロール
+    audio.volume = 0.7; // 初期70%
+    volumeSlider.addEventListener('input', (e) => audio.volume = e.target.value / 100);
+
+    // ドラッグ移動システム
+    const player = document.getElementById('music-player');
+    document.getElementById('player-min-toggle').addEventListener('click', () => {
+        player.classList.toggle('minimized');
+        document.getElementById('player-min-toggle').innerHTML = player.classList.contains('minimized') 
+            ? '<i class="fa-solid fa-expand"></i>' 
+            : '<i class="fa-solid fa-minus"></i>';
+    });
+
+    const dragZone = document.getElementById('player-drag-zone');
+    let isDragging = false, startX, startY, initialX, initialY;
+
+    dragZone.addEventListener('mousedown', (e) => {
+        if(window.innerWidth <= 768) return;
+        isDragging = true;
+        startX = e.clientX; startY = e.clientY;
+        const rect = player.getBoundingClientRect();
+        initialX = rect.left; initialY = rect.top;
+        player.style.bottom = 'auto';
+        player.style.left = initialX + 'px';
+        player.style.top = initialY + 'px';
+    });
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        player.style.left = (initialX + e.clientX - startX) + 'px';
+        player.style.top = (initialY + e.clientY - startY) + 'px';
+        player.style.right = 'auto';
+    });
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    /* =================================================================
+       D. SECURITY & UTILS
+    ==================================================================== */
+    function reveal() {
+        document.querySelectorAll('.reveal').forEach((el) => {
+            if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+        });
+    }
+    window.addEventListener('scroll', reveal);
+
+    // 強力なコピー・解析防止
+    window.addEventListener('contextmenu', e => e.preventDefault());
+    window.addEventListener('dragstart', e => e.preventDefault());
+    window.addEventListener('selectstart', e => e.preventDefault());
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'F12' || e.keyCode === 123 || 
+           (e.ctrlKey || e.metaKey) && [67, 85, 83, 65, 73].includes(e.keyCode)) {
+            e.preventDefault();
+            document.body.classList.add('devtools-open');
+            return false;
+        }
+    });
+    setInterval(() => {
+        const start = performance.now();
+        debugger;
+        if (performance.now() - start > 50 || window.outerWidth - window.innerWidth > 160) {
+            document.body.classList.add('devtools-open');
+        }
+    }, 500);
+
+    // 404画面
+    window.addEventListener('hashchange', () => {
+        if(window.location.hash) document.getElementById('error-404-screen').style.display = 'flex';
+    });
+    function close404() {
+        document.getElementById('error-404-screen').style.display = 'none';
+        window.location.hash = '';
+    }
+</script>
+
+```
+</body>  
+</html>  
